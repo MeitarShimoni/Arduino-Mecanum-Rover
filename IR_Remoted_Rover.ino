@@ -1,69 +1,98 @@
-#include <IRremote.h>
+#include <IRremote.hpp>
+#include <AFMotor.h>
+// #include <Servo.h>
 
-#define IR_RECEIVE_PIN 44
+#define IR_RECEIVE_PIN 18
 
 // Replace these with your actual remote codes (use previous test code to get them)
-#define IR_FORWARD   0xFFA25D
-#define IR_BACKWARD  0xFFE21D
-#define IR_LEFT      0xFF22DD
-#define IR_RIGHT     0xFF02FD
-#define IR_STOP      0xFFC23D
+#define IR_FORWARD   0x18
+#define IR_BACKWARD  0x52
+#define IR_LEFT      0x8
+#define IR_RIGHT     0x5A
+#define IR_STOP      0x1C
+#define IR_Exited    0x45
+
+#define Right90    0xD
+#define Left90    0x16
+#define Turn180    0x19
+
+// === Function Declarations ===
+void Forward(int duration);
+void Backward(int duration);
+void Stop();
+void turn180CCW();
+void turn180CW();
+void MoveLeft(int duration = 500);
+void MoveRight(int duration = 500);
+void GetExcited(int duration);
+void SetMotors();
 
 IRrecv irrecv(IR_RECEIVE_PIN);
 decode_results results;
 
 void setup() {
   Serial.begin(9600);
-  irrecv.begin();
+  IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
 
-  // Setup your motor control pins here
-  // For example:
-  pinMode(5, OUTPUT);  // Motor A forward
-  pinMode(6, OUTPUT);  // Motor A backward
-  pinMode(9, OUTPUT);  // Motor B forward
-  pinMode(10, OUTPUT); // Motor B backward
-
-  stopMotors();
+  SetMotors();
+  Serial.println("Rover Starting...");
+  GetExcited(250); // At starup he will be exited to   
 }
 
 void loop() {
-  if (irrecv.decode(&results)) {
-    Serial.print("Received: ");
-    Serial.println(results.value, HEX);
+  if (IrReceiver.decode()) {
 
-    switch (results.value) {
+    Serial.print("Received: ");
+    Serial.println(IrReceiver.decodedIRData.command, HEX);
+
+    switch (IrReceiver.decodedIRData.command) {
+
+      Serial.print("Raw IR Value: 0x");
+      Serial.println(IrReceiver.decodedIRData.command, HEX);
+
       case IR_FORWARD:
-        Serial.println("Moving Forward");
-        // moveForward();
+        Forward(0);
         break;
 
       case IR_BACKWARD:
-        Serial.println("Moving Backward");
-        // moveBackward();
+        Backward(0);
         break;
 
       case IR_LEFT:
-        Serial.println("Turning Left");
-        // turnLeft();
+        MoveLeft(0);
         break;
 
       case IR_RIGHT:
-        Serial.println("Turning Right");
-        // turnRight();
+        MoveRight(0);
         break;
 
       case IR_STOP:
-        Serial.println("Stopping");
-        // stopMotors();
+        Stop();
+        break;
+
+      case IR_Exited:
+        GetExcited(250);
+        break;
+
+      case Right90:
+        turn180CCW(1090*2.2/16);
+        break;
+
+      case Left90:
+        turn180CW(1090*2.2/18);
+        break;
+
+      case Turn180:
+        turn180CW(1090*2.2*0.7);
         break;
 
       default:
         Serial.println("Unknown command");
+        // Stop();
         break;
     }
 
-    irrecv.resume();  // Ready for the next command
+    IrReceiver.resume();  // Prepare for next signal
   }
 }
-
 
