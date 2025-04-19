@@ -51,6 +51,8 @@ An Arduino Mega-based rover project controlled by an IR remote, powered by the A
 *(You can adjust codes to match your remote in `#define` values)*
 
 ---
+📦 Libraries Used
 
-## 📁 File Structure
+IRremote
 
+Adafruit Motor Shield v1
