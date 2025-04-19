@@ -1,40 +1,56 @@
-# 🚗 Arduino Mecanum Rover 🤖  
-> Omnidirectional motion meets open-source control
+# 🤖 Arduino Mecanum Rover with IR Remote Control
 
-Welcome to the **Arduino Mecanum Rover**—a DIY robot that can move **forward, backward, sideways, diagonally**, and even **spin like a legend** thanks to its Mecanum wheels.
-
-Powered by an **Arduino Mega**, controlled via **IR remote**, and built to roll in style.
+An Arduino Mega-based rover project controlled by an IR remote, powered by the Adafruit Motor Shield (v1), featuring smooth motor acceleration and modular structure. Designed for fun, testing, and future expansion like obstacle detection or servo-camera control.
 
 ---
 
-## 🔧 Features
+## 🚀 Features
 
-- 🎮 IR remote control interface (via `IRremote.h`)
-- ⚙️ Omnidirectional movement using 4 Mecanum wheels
-- 🧠 Modular code (easy to expand)
-- 🔌 Powered by an H-bridge shield
-- 🧾 IR command mapping (move, stop, turn)
-- 👨‍💻 Beginner-friendly design & clean structure
+- 🔁 IR remote control (forward, backward, left, right, stop, "excited mode")
+- 💨 Smooth acceleration for forward motion
+- 🧱 Modular codebase (main logic, motor functions, constants)
+- 🧠 Designed for Adafruit Motor Shield v1 + Arduino Mega
+- 🔌 Expandable for ultrasonic sensors, servos, and more
 
 ---
 
 ## 🧰 Hardware
 
-| Component          | Description                      |
-|--------------------|----------------------------------|
-| Arduino Mega       | Brain of the rover               |
-| H-Bridge Shield    | Controls motor direction         |
-| 4x Mecanum Wheels  | Enables omnidirectional motion   |
-| IR Receiver Module | Receives commands from remote    |
-| Remote Control     | Any IR TV/DVD remote             |
-| Power Supply       | Battery pack or regulated source |
+| Component             | Details                        |
+|-----------------------|--------------------------------|
+| Arduino Mega          | Main controller                |
+| Adafruit Motor Shield | v1, controls 4 DC motors       |
+| IR Receiver Module    | Signal pin on **Pin 18**       |
+| 4x DC Motors          | Mecanum or standard wheels     |
+| Power Supply          | Separate motor power (recommended) |
+| Optional              | Servo or ultrasonic modules    |
 
 ---
 
-## 💻 Software
+## 🛠 Pin Configuration
 
-- **Language**: Arduino C++
-- **Library used**: [`IRremote`](https://github.com/Arduino-IRremote/Arduino-IRremote)
+| Signal              | Arduino Mega Pin |
+|---------------------|------------------|
+| IR Receiver Signal  | D18              |
+| Motor Shield        | Uses M1–M4       |
+| Power               | 5V, GND, VIN     |
 
-### 📦 Install IRremote
-In the Arduino IDE:
+---
+
+## 🧩 IR Remote Commands
+
+| Button        | Hex Code | Action         |
+|---------------|----------|----------------|
+| Forward       | `0x18`   | Move forward   |
+| Backward      | `0x52`   | Move backward  |
+| Turn Left     | `0x08`   | Turn left      |
+| Turn Right    | `0x5A`   | Turn right     |
+| Stop          | `0x1C`   | Stop motors    |
+| Get Excited 🎉 | `0x45`   | Spin and dance |
+
+*(You can adjust codes to match your remote in `#define` values)*
+
+---
+
+## 📁 File Structure
+
