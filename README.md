@@ -53,6 +53,5 @@ An Arduino Mega-based rover project controlled by an IR remote, powered by the A
 ---
 📦 Libraries Used
 
-IRremote
-
-Adafruit Motor Shield v1
+. IRremote
+. Adafruit Motor Shield v1
