@@ -3,7 +3,7 @@
 An Arduino Mega-based rover project controlled by an IR remote, powered by the Adafruit Motor Shield (v1), featuring smooth motor acceleration and modular structure. Designed for fun, testing, and future expansion like obstacle detection or servo-camera control.
 
 ---
-
+![My Rover](images/1.jpg)
 ## 🚀 Features
 
 - 🔁 IR remote control (forward, backward, left, right, stop, "excited mode")
