@@ -51,7 +51,15 @@ An Arduino Mega-based rover project controlled by an IR remote, powered by the A
 *(You can adjust codes to match your remote in `#define` values)*
 
 ---
-📦 Libraries Used
+## 📦 Libraries Used
 
-. IRremote
-. Adafruit Motor Shield v1
+### 🔹 [IRremote](https://github.com/Arduino-IRremote/Arduino-IRremote)
+- Author: Armin Joachimsmeyer  
+- Version: 4.x  
+- Description: Decodes signals from standard IR remotes. Used to control the rover via buttons for forward, backward, stop, etc.
+
+### 🔹 [Adafruit Motor Shield v1 Library](https://github.com/adafruit/Adafruit-Motor-Shield-library)
+- Author: Adafruit Industries  
+- Description: Allows control of DC motors and servos using the original Adafruit Motor Shield (v1). Used to control all four rover motors via M1–M4 channels.
+
+
